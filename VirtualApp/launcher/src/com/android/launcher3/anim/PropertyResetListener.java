@@ -19,11 +19,15 @@ package com.android.launcher3.anim;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
+import android.os.Build;
 import android.util.Property;
+
+import androidx.annotation.RequiresApi;
 
 /**
  * An AnimatorListener that sets the given property to the given value at the end of the animation.
  */
+@RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
 public class PropertyResetListener<T, V> extends AnimatorListenerAdapter {
 
     private Property<T, V> mPropertyToReset;

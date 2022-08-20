@@ -9,15 +9,18 @@ import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
-import android.support.animation.SpringAnimation;
-import android.support.v4.graphics.ColorUtils;
-import android.support.v4.view.animation.FastOutSlowInInterpolator;
+import android.os.Build;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
 import android.view.inputmethod.InputMethodManager;
+
+import androidx.annotation.RequiresApi;
+import androidx.core.graphics.ColorUtils;
+import androidx.dynamicanimation.animation.SpringAnimation;
+import androidx.interpolator.view.animation.FastOutSlowInInterpolator;
 
 import com.android.launcher3.AbstractFloatingView;
 import com.android.launcher3.Hotseat;
@@ -196,6 +199,7 @@ public class AllAppsTransitionController implements TouchController, SwipeDetect
         return mProgress > 1 - RECATCH_REJECTION_FRACTION;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
     @Override
     public void onDragStart(boolean start) {
         mCaretController.onDragStart();
@@ -335,6 +339,7 @@ public class AllAppsTransitionController implements TouchController, SwipeDetect
     /**
      * @param start {@code true} if start of new drag.
      */
+    @RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
     public void preparePull(boolean start) {
         if (start) {
             ((InputMethodManager) mLauncher.getSystemService(Context.INPUT_METHOD_SERVICE))
@@ -444,6 +449,7 @@ public class AllAppsTransitionController implements TouchController, SwipeDetect
         mAnimationDuration = SwipeDetector.calculateDuration(velocity, disp / mShiftRange);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
     public boolean animateToAllApps(AnimatorSet animationOut, long duration) {
         boolean shouldPost = true;
         if (animationOut == null) {

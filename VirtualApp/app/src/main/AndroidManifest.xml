@@ -13,8 +13,8 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/vxp"
-        android:theme="@style/LauncherTheme"
         android:networkSecurityConfig="@xml/network_security_config"
+        android:theme="@style/LauncherTheme"
         tools:replace="android:icon,android:label">
 
         <meta-data
@@ -22,15 +22,15 @@
             android:value="2.3"
             tools:replace="android:value" />
 
-        <meta-data
-            android:name="android.support.VERSION"
-            android:value="com.android.support:design:25.4.0"
-            tools:replace="android:value" />
+        <!--        <meta-data-->
+        <!--            android:name="android.support.VERSION"-->
+        <!--            android:value="com.android.support:design:25.4.0"-->
+        <!--            tools:replace="android:value" />-->
 
         <activity
             android:name=".splash.SplashActivity"
-            android:screenOrientation="portrait"
             android:exported="true"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -87,9 +87,9 @@
             android:name=".sys.ShareBridgeActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:excludeFromRecents="true"
+            android:exported="true"
             android:label="@string/shared_to_vxp"
             android:screenOrientation="portrait"
-            android:exported="true"
             android:taskAffinity="${applicationId}.share"
             android:theme="@style/Theme.AppCompat.Light.Dialog">
             <intent-filter>

@@ -18,13 +18,6 @@ package com.android.launcher3.allapps;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.support.animation.DynamicAnimation;
-import android.support.animation.SpringAnimation;
-import android.support.v4.view.accessibility.AccessibilityEventCompat;
-import android.support.v4.view.accessibility.AccessibilityNodeInfoCompat;
-import android.support.v4.view.accessibility.AccessibilityRecordCompat;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +26,14 @@ import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityEvent;
 import android.widget.TextView;
+
+import androidx.core.view.accessibility.AccessibilityEventCompat;
+import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
+import androidx.core.view.accessibility.AccessibilityRecordCompat;
+import androidx.dynamicanimation.animation.DynamicAnimation;
+import androidx.dynamicanimation.animation.SpringAnimation;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.launcher3.AppInfo;
 import com.android.launcher3.BubbleTextView;
@@ -125,14 +126,14 @@ public class AllAppsGridAdapter extends RecyclerView.Adapter<AllAppsGridAdapter.
 
         @Override
         public int getRowCountForAccessibility(RecyclerView.Recycler recycler,
-                RecyclerView.State state) {
+                                               RecyclerView.State state) {
             return super.getRowCountForAccessibility(recycler, state) -
                     getRowsNotForAccessibility(mApps.getAdapterItems().size() - 1);
         }
 
         @Override
         public void onInitializeAccessibilityNodeInfoForItem(RecyclerView.Recycler recycler,
-                RecyclerView.State state, View host, AccessibilityNodeInfoCompat info) {
+                                                             RecyclerView.State state, View host, AccessibilityNodeInfoCompat info) {
             super.onInitializeAccessibilityNodeInfoForItem(recycler, state, host, info);
 
             ViewGroup.LayoutParams lp = host.getLayoutParams();
@@ -182,8 +183,8 @@ public class AllAppsGridAdapter extends RecyclerView.Adapter<AllAppsGridAdapter.
             if (isIconViewType(mApps.getAdapterItems().get(position).viewType)) {
                 return 1;
             } else {
-                    // Section breaks span the full width
-                    return mAppsPerRow;
+                // Section breaks span the full width
+                return mAppsPerRow;
             }
         }
     }
@@ -431,7 +432,7 @@ public class AllAppsGridAdapter extends RecyclerView.Adapter<AllAppsGridAdapter.
 
         /**
          * @param spring A new or recycled SpringAnimation.
-         * @param vh The ViewHolder that {@param spring} is related to.
+         * @param vh     The ViewHolder that {@param spring} is related to.
          */
         @Override
         public void update(SpringAnimation spring, ViewHolder vh) {
@@ -483,13 +484,13 @@ public class AllAppsGridAdapter extends RecyclerView.Adapter<AllAppsGridAdapter.
         /**
          * @return The app position is the position of the app in the Adapter if we ignored all
          * other view types.
-         *
+         * <p>
          * The first app is at position 0, and the first app each following row is at a
          * position that is a multiple of {@param appsPerRow}.
-         *
+         * <p>
          * ie. If there are 5 apps per row, and there are two rows of apps:
-         *     0 1 2 3 4
-         *     5 6 7 8 9
+         * 0 1 2 3 4
+         * 5 6 7 8 9
          */
         private int getAppPosition(int position, int numPredictedApps, int appsPerRow) {
             if (position < numPredictedApps) {

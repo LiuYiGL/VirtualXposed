@@ -15,8 +15,9 @@
  */
 package com.android.launcher3.allapps;
 
-import android.support.animation.SpringAnimation;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
+import androidx.dynamicanimation.animation.SpringAnimation;
+
 import android.view.KeyEvent;
 
 /**
@@ -32,7 +33,8 @@ public interface SearchUiManager {
     /**
      * A {@link SpringAnimation} that will be used when the user flings.
      */
-    @NonNull SpringAnimation getSpringForFling();
+    @NonNull
+    SpringAnimation getSpringForFling();
 
     /**
      * Notifies the search manager that the apps-list has changed and the search UI should be

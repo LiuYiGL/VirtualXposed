@@ -200,7 +200,7 @@ public final class VClientImpl extends IVClient.Stub {
             );
         } else {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S){
-                ArrayMap activities = ActivityThread.mActivities.get(ActivityThread.currentActivityThread.call(null));
+                ArrayMap activities = ActivityThread.mActivities.get(ActivityThread.currentActivityThread.call());
                 ActivityThread.handleNewIntent.call(VirtualCore.mainThread(), activities.get(data.token), Collections.singletonList(intent));
             } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 ActivityThread.handleNewIntent.call(VirtualCore.mainThread(), data.token, Collections.singletonList(intent));

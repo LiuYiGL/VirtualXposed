@@ -1,12 +1,15 @@
 package io.virtualapp.settings;
 
+import static io.virtualapp.utils.DialogUtil.showDialog;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.SystemClock;
-import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
 
 import com.lody.virtual.client.core.InstallStrategy;
 import com.lody.virtual.client.core.VirtualCore;
@@ -29,8 +32,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
-
-import static io.virtualapp.utils.DialogUtil.showDialog;
 
 /**
  * @author weishu

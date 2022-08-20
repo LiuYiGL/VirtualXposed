@@ -5,9 +5,10 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Log;
+
+import androidx.appcompat.app.AlertDialog;
 
 import com.lody.virtual.client.core.InstallStrategy;
 import com.lody.virtual.client.core.VirtualCore;
@@ -303,7 +304,7 @@ public class FakeGms {
         }
 
         if (yalpStoreUrl != null) {
-            downloadFile(yalpStoreUrl,yalpStoreFile,
+            downloadFile(yalpStoreUrl, yalpStoreFile,
                     (progress -> updateMessage(activity, dialog, "download yalp store.." + progress + "%")));
         }
 
@@ -407,6 +408,7 @@ public class FakeGms {
             fos.flush();
             return true;
         } catch (IOException e) {
+            e.printStackTrace();
             return false;
         } finally {
             if (fos != null) {

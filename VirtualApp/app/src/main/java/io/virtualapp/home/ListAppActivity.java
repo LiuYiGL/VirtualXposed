@@ -3,11 +3,13 @@ package io.virtualapp.home;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+import androidx.viewpager.widget.ViewPager;
+
 import android.view.MenuItem;
+
+import com.google.android.material.tabs.TabLayout;
 
 import io.virtualapp.R;
 import io.virtualapp.VCommends;

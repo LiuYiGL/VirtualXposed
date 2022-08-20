@@ -17,11 +17,6 @@ package com.android.launcher3.allapps.search;
 
 import android.content.Context;
 import android.graphics.Rect;
-import android.support.animation.FloatValueHolder;
-import android.support.animation.SpringAnimation;
-import android.support.animation.SpringForce;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.text.Selection;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -31,6 +26,12 @@ import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.FrameLayout;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.dynamicanimation.animation.FloatValueHolder;
+import androidx.dynamicanimation.animation.SpringAnimation;
+import androidx.dynamicanimation.animation.SpringForce;
 
 import com.android.launcher3.DeviceProfile;
 import com.android.launcher3.ExtendedEditText;
@@ -136,7 +137,8 @@ public class AppsSearchContainerLayout extends FrameLayout
     }
 
     @Override
-    public @NonNull SpringAnimation getSpringForFling() {
+    public @NonNull
+    SpringAnimation getSpringForFling() {
         return mSpring;
     }
 

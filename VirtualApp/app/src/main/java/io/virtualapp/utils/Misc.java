@@ -6,8 +6,9 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
 
 import io.virtualapp.R;
 import moe.feng.alipay.zerosdk.AlipayZeroSdk;

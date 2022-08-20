@@ -10,7 +10,7 @@ import com.lody.virtual.client.VClientImpl;
 import com.lody.virtual.client.core.VirtualCore;
 import com.lody.virtual.os.VUserHandle;
 import com.lody.virtual.remote.InstalledAppInfo;
-import com.microsoft.appcenter.crashes.Crashes;
+//import com.microsoft.appcenter.crashes.Crashes;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -67,7 +67,7 @@ public class MyCrashHandler extends BaseCrashHandler {
         if (exceptionType.equals(lastCrashType) && (now - lastCrash) < TimeUnit.MINUTES.toMillis(1)) {
             // continues crash, do not upload
         } else {
-            Crashes.trackError(e, properties, null);
+//            Crashes.trackError(e, properties, null);
         }
 
         Log.i(TAG, "uncaught :" + t, e);

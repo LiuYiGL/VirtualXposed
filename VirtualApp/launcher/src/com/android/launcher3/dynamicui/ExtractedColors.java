@@ -18,9 +18,11 @@ package com.android.launcher3.dynamicui;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.support.annotation.Nullable;
-import android.support.v4.graphics.ColorUtils;
-import android.support.v7.graphics.Palette;
+
+import androidx.annotation.Nullable;
+import androidx.core.graphics.ColorUtils;
+import androidx.palette.graphics.Palette;
+
 import android.util.Log;
 
 import com.android.launcher3.Utilities;
@@ -53,7 +55,7 @@ public class ExtractedColors {
     static {
         if (FeatureFlags.LAUNCHER3_GRADIENT_ALL_APPS) {
             VERSION = 3;
-            DEFAULT_VALUES = new int[] {
+            DEFAULT_VALUES = new int[]{
                     VERSION,            // VERSION_INDEX
                     0x40FFFFFF,         // HOTSEAT_INDEX: White with 25% alpha
                     DEFAULT_DARK,       // STATUS_BAR_INDEX
@@ -63,7 +65,7 @@ public class ExtractedColors {
             };
         } else if (FeatureFlags.QSB_IN_HOTSEAT) {
             VERSION = 2;
-            DEFAULT_VALUES = new int[] {
+            DEFAULT_VALUES = new int[]{
                     VERSION,            // VERSION_INDEX
                     0x40FFFFFF,         // HOTSEAT_INDEX: White with 25% alpha
                     DEFAULT_DARK,       // STATUS_BAR_INDEX
@@ -71,7 +73,7 @@ public class ExtractedColors {
             };
         } else {
             VERSION = 1;
-            DEFAULT_VALUES = new int[] {
+            DEFAULT_VALUES = new int[]{
                     VERSION,            // VERSION_INDEX
                     0x40FFFFFF,         // HOTSEAT_INDEX: White with 25% alpha
                     DEFAULT_DARK,       // STATUS_BAR_INDEX
@@ -129,7 +131,9 @@ public class ExtractedColors {
         }
     }
 
-    /** @param index must be one of the index values defined at the top of this class. */
+    /**
+     * @param index must be one of the index values defined at the top of this class.
+     */
     public int getColor(int index) {
         return mColors[index];
     }
