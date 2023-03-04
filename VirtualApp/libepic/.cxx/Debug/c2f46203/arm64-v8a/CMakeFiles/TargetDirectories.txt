@@ -1,0 +1,3 @@
+D:/0Course/Android_myself/Virtual/MySelf/VirtualXposed/VirtualApp/libepic/.cxx/Debug/c2f46203/arm64-v8a/CMakeFiles/epic.dir
+D:/0Course/Android_myself/Virtual/MySelf/VirtualXposed/VirtualApp/libepic/.cxx/Debug/c2f46203/arm64-v8a/CMakeFiles/edit_cache.dir
+D:/0Course/Android_myself/Virtual/MySelf/VirtualXposed/VirtualApp/libepic/.cxx/Debug/c2f46203/arm64-v8a/CMakeFiles/rebuild_cache.dir

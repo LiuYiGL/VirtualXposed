@@ -1,0 +1,5 @@
+# ninja log v5
+1	339	6995944204644537	CMakeFiles/epic.dir/fake_dlfcn.cpp.o	dd4ab4438318042f
+24	883	6995944210078740	CMakeFiles/epic.dir/art.cpp.o	3c1a864a1e9e89d1
+13	888	6995944210098752	CMakeFiles/epic.dir/epic.cpp.o	d4b359659098139b
+889	1200	6995944213101133	D:/0Course/Android_myself/Virtual/MySelf/VirtualXposed/VirtualApp/libepic/build/intermediates/cxx/Debug/c2f46203/obj/arm64-v8a/libepic.so	16e86c5640c337cb

@@ -122,6 +122,7 @@ class MethodProxies {
             return isAppProcess();
         }
     }
+
     static class GetDeclaredSharedLibraries extends GetSharedLibraries {
         @Override
         public String getMethodName() {
@@ -179,9 +180,9 @@ class MethodProxies {
 
     /**
      * @author Lody
-     *         <p>
-     *         public ActivityInfo getServiceInfo(ComponentName className, int
-     *         flags, int userId)
+     * <p>
+     * public ActivityInfo getServiceInfo(ComponentName className, int
+     * flags, int userId)
      */
     static class GetServiceInfo extends MethodProxy {
 
@@ -239,10 +240,10 @@ class MethodProxies {
 
     /**
      * @author Lody
-     *         <p>
-     *         <p>
-     *         public ActivityInfo getActivityInfo(ComponentName className, int
-     *         flags, int userId)
+     * <p>
+     * <p>
+     * public ActivityInfo getActivityInfo(ComponentName className, int
+     * flags, int userId)
      */
     static class GetActivityInfo extends MethodProxy {
 
@@ -667,7 +668,8 @@ class MethodProxies {
         @Override
         public Object call(Object who, Method method, Object... args) throws Throwable {
             String pkg = (String) args[0];
-            int flags = (int) args[1];
+            int flags = args[1] instanceof Long ? ((Long) args[1]).intValue()
+                    : (int) args[1];
             int userId = VUserHandle.myUserId();
             PackageInfo packageInfo = VPackageManager.get().getPackageInfo(pkg, flags, userId);
             if (packageInfo != null) {
@@ -1003,7 +1005,7 @@ class MethodProxies {
         @Override
         public Object call(Object who, Method method, Object... args) throws Throwable {
             String pkg = (String) args[0];
-            int flags = (int) args[1];
+            int flags = args[1] instanceof Long ? ((Long) args[1]).intValue() : (int) args[1];
             if (getHostPkg().equals(pkg)) {
                 return method.invoke(who, args);
             }

@@ -1,5 +1,6 @@
 package mirror;
 
+import android.os.Build;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -7,7 +8,8 @@ import java.util.HashMap;
 
 public final class RefClass {
 
-    private static HashMap<Class<?>,Constructor<?>> REF_TYPES = new HashMap<Class<?>, Constructor<?>>();
+    private static HashMap<Class<?>, Constructor<?>> REF_TYPES = new HashMap<Class<?>, Constructor<?>>();
+
     static {
         try {
             REF_TYPES.put(RefObject.class, RefObject.class.getConstructor(Class.class, Field.class));
@@ -21,8 +23,7 @@ public final class RefClass {
             REF_TYPES.put(RefStaticInt.class, RefStaticInt.class.getConstructor(Class.class, Field.class));
             REF_TYPES.put(RefStaticMethod.class, RefStaticMethod.class.getConstructor(Class.class, Field.class));
             REF_TYPES.put(RefConstructor.class, RefConstructor.class.getConstructor(Class.class, Field.class));
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -41,17 +42,38 @@ public final class RefClass {
         for (Field field : fields) {
             try {
                 if (Modifier.isStatic(field.getModifiers())) {
+                    ApiRequest annotation = field.getAnnotation(ApiRequest.class);
+                    if (annotation != null && !isSupport(annotation)) continue;
                     Constructor<?> constructor = REF_TYPES.get(field.getType());
                     if (constructor != null) {
                         field.set(null, constructor.newInstance(realClass, field));
                     }
                 }
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 // Ignore
+                e.printStackTrace();
             }
         }
         return realClass;
     }
 
+    /**
+     * 对属性进行Api检查，减少各个版本之间的差异适配
+     *
+     * @param apiRequest
+     * @return
+     */
+    private static boolean isSupport(ApiRequest apiRequest) {
+        for (int i : apiRequest.value()) {
+            if (i == Build.VERSION.SDK_INT) {
+                return true;
+            }
+        }
+        for (int i : apiRequest.except()) {
+            if (i == Build.VERSION.SDK_INT) {
+                return false;
+            }
+        }
+        return apiRequest.allVersion();
+    }
 }
