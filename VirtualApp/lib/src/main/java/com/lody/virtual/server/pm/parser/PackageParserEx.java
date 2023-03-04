@@ -39,6 +39,7 @@ import java.util.List;
 
 import mirror.android.content.pm.ApplicationInfoL;
 import mirror.android.content.pm.ApplicationInfoN;
+import mirror.android.content.pm.SigningInfoTiramisu;
 
 /**
  * @author Lody
@@ -220,7 +221,11 @@ public class PackageParserEx {
                     System.arraycopy(signatures, 0, cache.mSignatures, 0, numberOfSigs);
                 }
             }
-            cache.signingInfo = mirror.android.content.pm.PackageParser.SigningInfo.ctor.newInstance(signingDetails);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                cache.signingInfo = SigningInfoTiramisu.ctor.newInstance(signingDetails);
+            } else {
+                cache.signingInfo = mirror.android.content.pm.PackageParser.SigningInfo.ctor.newInstance(signingDetails);
+            }
         }
         cache.mAppMetaData = p.mAppMetaData;
         cache.packageName = p.packageName;
@@ -294,7 +299,7 @@ public class PackageParserEx {
             ApplicationInfoL.scanPublicSourceDir.set(ai, ai.dataDir);
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            if(Build.VERSION.SDK_INT < 26) {
+            if (Build.VERSION.SDK_INT < 26) {
                 ApplicationInfoN.deviceEncryptedDataDir.set(ai, ai.dataDir);
                 ApplicationInfoN.credentialEncryptedDataDir.set(ai, ai.dataDir);
             }

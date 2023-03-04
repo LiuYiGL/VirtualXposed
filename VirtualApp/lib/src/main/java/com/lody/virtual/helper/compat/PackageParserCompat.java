@@ -26,6 +26,7 @@ import mirror.android.content.pm.PackageParserLollipop22;
 import mirror.android.content.pm.PackageParserMarshmallow;
 import mirror.android.content.pm.PackageParserNougat;
 import mirror.android.content.pm.PackageParserP28;
+import mirror.android.content.pm.PackageParserTiramisu;
 import mirror.android.content.pm.PackageUserState;
 
 import static android.os.Build.VERSION_CODES.JELLY_BEAN;
@@ -34,6 +35,7 @@ import static android.os.Build.VERSION_CODES.LOLLIPOP;
 import static android.os.Build.VERSION_CODES.LOLLIPOP_MR1;
 import static android.os.Build.VERSION_CODES.M;
 import static android.os.Build.VERSION_CODES.N;
+import static android.os.Build.VERSION_CODES.TIRAMISU;
 
 /**
  * @author Lody
@@ -44,11 +46,19 @@ public class PackageParserCompat {
     public static final int[] GIDS = VirtualCore.get().getGids();
     private static final int API_LEVEL = Build.VERSION.SDK_INT;
     private static final int myUserId = VUserHandle.getUserId(Process.myUid());
-    private static final Object sUserState = API_LEVEL >= JELLY_BEAN_MR1 ? PackageUserState.ctor.newInstance() : null;
+    //    private static final Object sUserState = API_LEVEL >= JELLY_BEAN_MR1 ? PackageUserState.ctor.newInstance() : null;
+    private static final Object sUserState;
 
+    static {
+        // todo : fix for android 13
+        sUserState = API_LEVEL >= JELLY_BEAN_MR1 && PackageUserState.ctor != null
+                ? PackageUserState.ctor.newInstance() : null;
+    }
 
     public static PackageParser createParser(File packageFile) {
-        if (API_LEVEL >= M) {
+        if (API_LEVEL >= TIRAMISU) {
+            return PackageParserTiramisu.ctor.newInstance();
+        } else if (API_LEVEL >= M) {
             return PackageParserMarshmallow.ctor.newInstance();
         } else if (API_LEVEL >= LOLLIPOP_MR1) {
             return PackageParserLollipop22.ctor.newInstance();
@@ -67,8 +77,9 @@ public class PackageParserCompat {
         if (BuildCompat.isQ()) {
             PackageParserP28.setCallback.call(parser, PackageParserP28.CallbackImpl.ctor.newInstance(VirtualCore.getPM()));
         }
-
-        if (API_LEVEL >= M) {
+        if (API_LEVEL >= TIRAMISU) {
+            return PackageParserTiramisu.parsePackage.callWithException(parser, packageFile, flags);
+        } else if (API_LEVEL >= M) {
             return PackageParserMarshmallow.parsePackage.callWithException(parser, packageFile, flags);
         } else if (API_LEVEL >= LOLLIPOP_MR1) {
             return PackageParserLollipop22.parsePackage.callWithException(parser, packageFile, flags);

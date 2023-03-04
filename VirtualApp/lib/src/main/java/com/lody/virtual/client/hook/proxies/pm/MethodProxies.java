@@ -1005,7 +1005,7 @@ class MethodProxies {
         @Override
         public Object call(Object who, Method method, Object... args) throws Throwable {
             String pkg = (String) args[0];
-            int flags = (int) args[1];
+            int flags = args[1] instanceof Long ? ((Long) args[1]).intValue() : (int) args[1];
             if (getHostPkg().equals(pkg)) {
                 return method.invoke(who, args);
             }

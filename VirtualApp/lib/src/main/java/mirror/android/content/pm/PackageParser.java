@@ -10,12 +10,14 @@ import android.content.pm.PermissionInfo;
 import android.content.pm.ProviderInfo;
 import android.content.pm.ServiceInfo;
 import android.content.pm.Signature;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 
 import java.io.File;
 import java.util.List;
 
+import mirror.ApiRequest;
 import mirror.MethodParams;
 import mirror.MethodReflectParams;
 import mirror.RefClass;
@@ -53,6 +55,7 @@ public class PackageParser {
         public static RefObject<List> activities;
         public static RefObject<Bundle> mAppMetaData;
         public static RefObject<String> mSharedUserId;
+        @ApiRequest(allVersion = false, except = {Build.VERSION_CODES.TIRAMISU})
         public static RefObject<Signature[]> mSignatures;
         public static RefObject<Integer> mVersionCode;
         public static RefObject<String> packageName;
